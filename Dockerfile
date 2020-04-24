@@ -1,15 +1,42 @@
-FROM jenkins/jenkins:lts
+## choose alpine image
+FROM jenkins/jenkins:lts-alpine
 
 # To run apt
 USER root
 
-# Install PowerShell from Microsoft’s repository
-# The jenkins:lts image is based on Debian 9 (Stretch)
-# For information about how to install PowerShell in Debian 9, see the following link:
-# https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-6#debian-9
-RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-jessie-prod jessie main" > /etc/apt/sources.list.d/microsoft.list'
-RUN apt-get update && apt-get install -y powershell
+# install the requirements
+RUN apk add --no-cache \
+    ca-certificates \
+    less \
+    ncurses-terminfo-base \
+    krb5-libs \
+    libgcc \
+    libintl \
+    libssl1.1 \
+    libstdc++ \
+    tzdata \
+    userspace-rcu \
+    zlib \
+    icu-libs \
+    curl
+
+RUN apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache \
+    lttng-ust
+
+# Download the powershell '.tar.gz' archive
+RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v7.0.0/powershell-7.0.0-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz
+
+# Create the target folder where powershell will be placed
+RUN mkdir -p /opt/microsoft/powershell/7
+
+# Expand powershell to the target folder
+RUN tar zxf /tmp/powershell.tar.gz -C /opt/microsoft/powershell/7
+
+# Set execute permissions
+RUN chmod +x /opt/microsoft/powershell/7/pwsh
+
+# Create the symbolic link that points to pwsh
+RUN ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
 # Drop back to the jenkins user
 USER jenkins
