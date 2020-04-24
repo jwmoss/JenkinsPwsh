@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y apt-transport-https && rm -rf /var/lib/
 # For information about how to install PowerShell in Debian 9, see the following link:
 # https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell-core-on-linux?view=powershell-6#debian-9
 RUN curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
-RUN h -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-jessie-prod jessie main" > /etc/apt/sources.list.d/microsoft.list'
+RUN sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-debian-jessie-prod jessie main" > /etc/apt/sources.list.d/microsoft.list'
 RUN apt-get update && apt-get install -y powershell && rm -rf /var/lib/apt/lists/*
 
 # Drop back to the jenkins user
