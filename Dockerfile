@@ -1,5 +1,5 @@
 ## choose alpine image
-FROM jenkins/jenkins:alpine
+FROM jenkins/jenkins:lts-alpine
 
 # To run apt
 USER root
