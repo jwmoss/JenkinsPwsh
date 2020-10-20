@@ -4,7 +4,17 @@ FROM jenkins/jenkins:lts-alpine
 # To run apt
 USER root
 
-# install the requirements
+# Environment variables
+ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc_configs
+ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false 
+
+## Copy plugins 
+COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+
+## Install the plugins
+RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
+
+# install the requirements for pwsh
 RUN apk add --no-cache \
     ca-certificates \
     less \
@@ -40,3 +50,6 @@ RUN ln -s /opt/microsoft/powershell/7/pwsh /usr/bin/pwsh
 
 # Drop back to the jenkins user
 USER jenkins
+
+VOLUME /jenkins_configs
+VOLUME /var/jenkins_home
