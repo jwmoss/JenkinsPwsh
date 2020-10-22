@@ -4,12 +4,18 @@ FROM jenkins/jenkins:lts-alpine
 # To run apt
 USER root
 
+## Create location to place config as code
+RUN mkdir $JENKINS_HOME/casc_configs
+
 # Environment variables
-ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc_configs
+ENV CASC_JENKINS_CONFIG $JENKINS_HOME/casc_configs
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false 
 
 ## Copy plugins 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
+
+## Copy jenkins config as code
+COPY jenkins.yaml $JENKINS_HOME/casc_configs/jenkins.yaml
 
 ## Install the plugins
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
