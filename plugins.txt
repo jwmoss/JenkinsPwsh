@@ -46,7 +46,7 @@ jquery3-api: 3.5.1-2
 jackson2-api: 2.11.3
 plugin-util-api: 1.4.0
 echarts-api: 4.9.0-2
-junit: 1.39
+junit: 1.41
 workflow-cps: 2.83
 timestamper: 1.11.5
 workflow-job: 2.40
