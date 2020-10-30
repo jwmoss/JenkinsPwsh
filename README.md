@@ -2,26 +2,14 @@
 
 * Jenkins Server with Powershell installed
 
-## Build the image
+## Build and run the image
 
 ```bash
-docker build . -t jenkinspwsh:1.0 -f ./dockerfile
+./build.sh
 ```
 
-## Run the image
+## Reset
 
 ```bash
-docker run --name jenkinspwsh -p 8080:8080 -p 50000:50000 -d jenkinspwsh
-```
-
-## Check the logs
-
-```bash
-
-```
-
-## Start over
-
-```bash
-docker rm -f $(docker ps -a -q)
+./reset.sh
 ```
