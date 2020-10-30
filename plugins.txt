@@ -22,3 +22,6 @@ workflow-aggregator:latest
 ws-cleanup:latest
 authorize-project:latest
 credentials: latest
+bouncycastle-api: latest
+command-launcher: latest
+jdk-tool: latest
