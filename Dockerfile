@@ -6,12 +6,13 @@ USER root
 
 # Environment variables
 ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false 
+ENV CASC_JENKINS_CONFIG /var/jenkins_home/jenkins.yaml
 
 ## Copy plugins 
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
 
 ## Copy jenkins config as code
-COPY jenkins.yaml $JENKINS_HOME
+COPY jenkins.yaml /var/jenkins_home
 
 ## Install the plugins
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
