@@ -1,6 +1,6 @@
 configuration-as-code: latest
 powershell: latest
-job-dsl: job-dsl:1.72
+job-dsl:1.72
 antisamy-markup-formatter:latest
 build-timeout:latest
 cloudbees-folder:latest
