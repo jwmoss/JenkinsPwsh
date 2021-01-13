@@ -4,16 +4,6 @@ FROM jenkins/jenkins:lts-alpine
 # To run apt
 USER root
 
-# Environment variables
-ENV JAVA_OPTS -Djenkins.install.runSetupWizard=false 
-ENV CASC_JENKINS_CONFIG /var/jenkins_home/jenkins.yaml
-
-## Copy plugins 
-COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
-
-## Copy jenkins config as code
-RUN curl -L https://gist.githubusercontent.com/jwmoss/bd6778ece347e270190ebcb83c4c3e1e/raw/87973df45a36fae8ceb5e003322a7282428be273/jenkins.yaml -o /var/jenkins_home/jenkins.yaml
-
 ## Install the plugins
 RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
 
