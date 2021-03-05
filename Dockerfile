@@ -5,7 +5,7 @@ FROM jenkins/jenkins:lts-alpine
 USER root
 
 ## Install the plugins
-RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
+#RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
 
 # install the requirements
 RUN apk add --no-cache \
