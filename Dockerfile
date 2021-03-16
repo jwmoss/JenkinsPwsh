@@ -23,11 +23,12 @@ RUN apk add --no-cache \
     icu-libs \
     curl
 
+
 RUN apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache \
     lttng-ust
 
 # Download the powershell '.tar.gz' archive
-RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v7.1.2/powershell-7.1.2-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz
+RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v7.1.3/powershell-7.1.3-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz
 
 # Create the target folder where powershell will be placed
 RUN mkdir -p /opt/microsoft/powershell/7
