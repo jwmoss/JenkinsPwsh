@@ -4,10 +4,7 @@ FROM jenkins/jenkins:lts-alpine
 # To run apt
 USER root
 
-## Install the plugins
-#RUN jenkins-plugin-cli -f /usr/share/jenkins/ref/plugins.txt
-
-# install the requirements
+# Install the requirements
 RUN apk add --no-cache \
     ca-certificates \
     less \
@@ -23,12 +20,11 @@ RUN apk add --no-cache \
     icu-libs \
     curl
 
-
 RUN apk -X https://dl-cdn.alpinelinux.org/alpine/edge/main add --no-cache \
     lttng-ust
 
 # Download the powershell '.tar.gz' archive
-RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v7.1.3/powershell-7.1.3-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz
+RUN curl -L https://github.com/PowerShell/PowerShell/releases/download/v7.2.1/powershell-7.2.1-linux-alpine-x64.tar.gz -o /tmp/powershell.tar.gz
 
 # Create the target folder where powershell will be placed
 RUN mkdir -p /opt/microsoft/powershell/7
